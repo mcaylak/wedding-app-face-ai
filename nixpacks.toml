@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ['python3', 'pip']
+nixPkgs = ['python3', 'pip', 'libxcb', 'libGL', 'glib', 'xorg.libXext', 'xorg.libSM', 'xorg.libICE', 'xorg.libX11']
 
 [phases.install]
 cmds = ['pip install -r requirements.txt']
