@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Virtual environments
+deepface_env/
+face_recognition_env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Face cache (if generated)
+face_cache/
+
+# Model downloads (they will be downloaded automatically)
+*.h5
+*.pb
+*.json
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+temp/
+tmp/
