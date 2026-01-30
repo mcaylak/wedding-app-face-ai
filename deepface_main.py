@@ -7,6 +7,10 @@ import os
 from deepface import DeepFace
 import json
 import numpy as np
+import aiohttp
+
+# Backend configuration
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8080")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -195,7 +199,6 @@ async def search_face(
         uploaded_encoding = face_encoding_response["face_encoding"]
         
         # Step 2: Get all face encodings for this wedding from the backend
-        import aiohttp
         import json
         
         try:
@@ -207,7 +210,7 @@ async def search_face(
             else:
                 logger.warning("No authorization token provided")
             
-            logger.info(f"Making request to: http://localhost:8080/api/photos/{weddingId}")
+            logger.info(f"Making request to: {BACKEND_URL}/api/photos/{weddingId}")
             logger.info(f"Request headers: {headers}")
             
             logger.info("Creating aiohttp ClientSession...")
@@ -215,7 +218,7 @@ async def search_face(
                 logger.info("ClientSession created successfully")
                 # Get photos for this wedding
                 logger.info(f"About to make GET request to backend API...")
-                async with session.get(f"http://localhost:8080/api/photos/{weddingId}", headers=headers) as resp:
+                async with session.get(f"{BACKEND_URL}/api/photos/{weddingId}", headers=headers) as resp:
                     logger.info(f"Backend API response status: {resp.status}")
                     if resp.status != 200:
                         logger.error(f"Failed to get photos from backend: {resp.status}")
