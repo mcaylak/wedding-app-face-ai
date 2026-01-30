@@ -5,17 +5,14 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender1 \
     libgomp1 \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    freeglut3-dev \
     cmake \
     build-essential \
     ffmpeg \
-    libavcodec-dev \
-    libavformat-dev \
-    libavutil-dev \
-    libswscale-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
