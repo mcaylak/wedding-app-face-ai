@@ -2,6 +2,17 @@ from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Request, Hea
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import logging
+import os
+import tempfile
+import json
+import numpy as np
+import requests
+import aiohttp
+import asyncio
+from typing import List
+
+# Backend configuration
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8080")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -279,7 +290,7 @@ async def search_face(
             
             async with aiohttp.ClientSession() as session:
                 # Get photos for this wedding
-                async with session.get(f"http://localhost:8080/api/photos/wedding/{weddingId}", headers=headers) as resp:
+                async with session.get(f"{BACKEND_URL}/api/photos/wedding/{weddingId}", headers=headers) as resp:
                     if resp.status != 200:
                         logger.error(f"Failed to get photos from backend: {resp.status}")
                         return {"matches": [], "message": f"Failed to get photos from backend (status: {resp.status})"}
